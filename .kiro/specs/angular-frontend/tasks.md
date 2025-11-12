@@ -140,23 +140,36 @@
   - Estilizar com SCSS responsivo
   - _Requirements: 1.1, 9.1, 12.4_
 
-- [ ] 6. Implementar pipes customizados
-- [ ] 6.1 Criar DateFormatPipe
+- [x] 6. Implementar pipes customizados
+
+
+
+
+
+
+- [x] 6.1 Criar DateFormatPipe
+
   - Implementar formatação de datas no padrão brasileiro
   - Suportar diferentes formatos
   - _Requirements: 13.1_
 
-- [ ] 6.2 Criar CurrencyFormatPipe
+
+- [x] 6.2 Criar CurrencyFormatPipe
+
   - Implementar formatação monetária com R$
   - Usar Intl.NumberFormat com locale pt-BR
   - _Requirements: 13.2_
 
-- [ ] 6.3 Criar PhoneFormatPipe
+- [x] 6.3 Criar PhoneFormatPipe
+
+
   - Implementar formatação de telefone brasileiro
   - Suportar formato +55 (XX) XXXXX-XXXX
   - _Requirements: 13.4_
 
-- [ ] 6.4 Criar VehicleStatusPipe
+- [x] 6.4 Criar VehicleStatusPipe
+
+
   - Implementar mapeamento de status para português
   - _Requirements: 8.1, 8.2, 8.3, 13.5_
 
