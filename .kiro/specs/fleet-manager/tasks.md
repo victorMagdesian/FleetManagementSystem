@@ -471,7 +471,12 @@
     - Use WebApplicationFactory for in-memory testing
     - _Requirements: 3.1, 4.4, 10.2_
 
-- [ ] 18. Write tests for Quartz.NET job
+- [x] 18. Write tests for Quartz.NET job
+
+
+
+
+
   - Test MaintenanceCheckJob.Execute method
   - Mock IVehicleRepository to return vehicles with upcoming maintenance
   - Verify log messages are generated for each vehicle
