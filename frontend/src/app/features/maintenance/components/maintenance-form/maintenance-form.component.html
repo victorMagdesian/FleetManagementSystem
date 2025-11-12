@@ -1,0 +1,107 @@
+<p-dialog 
+  header="Nova Manutenção"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '500px'}"
+  (onHide)="onCancel()">
+  
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="vehicleId">Veículo *</label>
+      <p-dropdown
+        id="vehicleId"
+        formControlName="vehicleId"
+        [options]="vehicles"
+        optionLabel="plate"
+        optionValue="id"
+        placeholder="Selecione um veículo"
+        [loading]="loadingVehicles"
+        [filter]="true"
+        filterBy="plate,model"
+        [showClear]="true"
+        [class.ng-invalid]="vehicleIdControl?.invalid && (vehicleIdControl?.dirty || vehicleIdControl?.touched)"
+        [class.ng-dirty]="vehicleIdControl?.dirty">
+        <ng-template let-vehicle pTemplate="item">
+          <div class="vehicle-option">
+            <span class="vehicle-plate">{{ vehicle.plate }}</span>
+            <span class="vehicle-model">{{ vehicle.model }}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <small class="error-message" *ngIf="getErrorMessage('vehicleId')">
+        {{ getErrorMessage('vehicleId') }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="date">Data *</label>
+      <p-calendar
+        id="date"
+        formControlName="date"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        placeholder="Selecione a data"
+        [class.ng-invalid]="dateControl?.invalid && (dateControl?.dirty || dateControl?.touched)"
+        [class.ng-dirty]="dateControl?.dirty">
+      </p-calendar>
+      <small class="error-message" *ngIf="getErrorMessage('date')">
+        {{ getErrorMessage('date') }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="description">Descrição *</label>
+      <textarea 
+        id="description"
+        pInputText
+        formControlName="description"
+        rows="3"
+        placeholder="Descreva o serviço realizado"
+        [class.ng-invalid]="descriptionControl?.invalid && (descriptionControl?.dirty || descriptionControl?.touched)"
+        [class.ng-dirty]="descriptionControl?.dirty">
+      </textarea>
+      <small class="error-message" *ngIf="getErrorMessage('description')">
+        {{ getErrorMessage('description') }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="cost">Custo (R$) *</label>
+      <p-inputNumber
+        id="cost"
+        formControlName="cost"
+        mode="currency"
+        currency="BRL"
+        locale="pt-BR"
+        [min]="0.01"
+        placeholder="0,00"
+        [class.ng-invalid]="costControl?.invalid && (costControl?.dirty || costControl?.touched)"
+        [class.ng-dirty]="costControl?.dirty">
+      </p-inputNumber>
+      <small class="error-message" *ngIf="getErrorMessage('cost')">
+        {{ getErrorMessage('cost') }}
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        pButton 
+        type="button"
+        label="Cancelar" 
+        class="p-button-text"
+        (click)="onCancel()"
+        [disabled]="loading">
+      </button>
+      <button 
+        pButton 
+        type="submit"
+        label="Registrar"
+        [loading]="loading"
+        [disabled]="form.invalid">
+      </button>
+    </div>
+  </form>
+</p-dialog>

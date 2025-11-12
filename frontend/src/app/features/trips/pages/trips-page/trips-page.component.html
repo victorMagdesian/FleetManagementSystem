@@ -1,0 +1,151 @@
+<div class="trips-page">
+  <div class="page-header">
+    <h1>Viagens</h1>
+    <button 
+      pButton 
+      label="Iniciar Viagem" 
+      icon="pi pi-play" 
+      (click)="openStartTripDialog()">
+    </button>
+  </div>
+
+  <p-tabView>
+    <p-tabPanel header="Todas">
+      <p-table 
+        [value]="allTrips" 
+        [loading]="loading"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} viagens"
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="vehicleId">
+              Veículo <p-sortIcon field="vehicleId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="driverId">
+              Condutor <p-sortIcon field="driverId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="route">
+              Rota <p-sortIcon field="route"></p-sortIcon>
+            </th>
+            <th pSortableColumn="startDate">
+              Início <p-sortIcon field="startDate"></p-sortIcon>
+            </th>
+            <th pSortableColumn="endDate">
+              Fim <p-sortIcon field="endDate"></p-sortIcon>
+            </th>
+            <th pSortableColumn="distance">
+              Distância <p-sortIcon field="distance"></p-sortIcon>
+            </th>
+            <th>Status</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-trip>
+          <tr>
+            <td>{{ trip.vehicleId }}</td>
+            <td>{{ trip.driverId }}</td>
+            <td><strong>{{ trip.route }}</strong></td>
+            <td>{{ trip.startDate | dateFormat:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ trip.endDate ? (trip.endDate | dateFormat:'dd/MM/yyyy HH:mm') : '-' }}</td>
+            <td>{{ trip.distance | number:'1.0-0' }} km</td>
+            <td>
+              <p-tag 
+                [value]="getTripStatus(trip)"
+                [severity]="getTripStatusSeverity(trip)">
+              </p-tag>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7" class="text-center">
+              <div class="empty-message">
+                <i class="pi pi-map"></i>
+                <p>Nenhuma viagem encontrada</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+
+    <p-tabPanel header="Ativas">
+      <p-table 
+        [value]="activeTrips" 
+        [loading]="loading"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} viagens ativas"
+        styleClass="p-datatable-striped">
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="vehicleId">
+              Veículo <p-sortIcon field="vehicleId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="driverId">
+              Condutor <p-sortIcon field="driverId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="route">
+              Rota <p-sortIcon field="route"></p-sortIcon>
+            </th>
+            <th pSortableColumn="startDate">
+              Início <p-sortIcon field="startDate"></p-sortIcon>
+            </th>
+            <th>Ações</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-trip>
+          <tr>
+            <td>{{ trip.vehicleId }}</td>
+            <td>{{ trip.driverId }}</td>
+            <td><strong>{{ trip.route }}</strong></td>
+            <td>{{ trip.startDate | dateFormat:'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+              <button 
+                pButton 
+                label="Finalizar" 
+                icon="pi pi-stop"
+                class="p-button-sm p-button-success"
+                (click)="openEndTripDialog(trip)">
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5" class="text-center">
+              <div class="empty-message">
+                <i class="pi pi-map"></i>
+                <p>Nenhuma viagem ativa no momento</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+
+<app-start-trip-form
+  [visible]="showStartTripDialog"
+  (onClose)="onStartTripClose()"
+  (onSuccess)="onStartTripSuccess()">
+</app-start-trip-form>
+
+<app-end-trip-form
+  [visible]="showEndTripDialog"
+  [trip]="selectedTrip"
+  (onClose)="onEndTripClose()"
+  (onSuccess)="onEndTripSuccess()">
+</app-end-trip-form>

@@ -1,0 +1,58 @@
+<p-dialog 
+  header="Histórico de Manutenções"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '700px'}"
+  (onHide)="onDialogHide()">
+  
+  <div class="maintenance-history">
+    <p-table 
+      [value]="maintenanceHistory" 
+      [loading]="loading"
+      styleClass="p-datatable-sm">
+      
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="date">
+            Data <p-sortIcon field="date"></p-sortIcon>
+          </th>
+          <th pSortableColumn="description">
+            Descrição <p-sortIcon field="description"></p-sortIcon>
+          </th>
+          <th pSortableColumn="cost">
+            Custo <p-sortIcon field="cost"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-maintenance>
+        <tr>
+          <td>{{ maintenance.date | dateFormat:'dd/MM/yyyy' }}</td>
+          <td>{{ maintenance.description }}</td>
+          <td>{{ maintenance.cost | currencyFormat }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="3" class="text-center">
+            <div class="empty-message">
+              <i class="pi pi-wrench"></i>
+              <p>Nenhuma manutenção registrada para este veículo</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="footer" *ngIf="maintenanceHistory.length > 0">
+        <tr>
+          <td colspan="2" class="total-label">Total:</td>
+          <td class="total-value">{{ getTotalCost() | currencyFormat }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-dialog>

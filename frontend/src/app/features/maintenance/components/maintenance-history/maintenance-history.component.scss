@@ -1,0 +1,57 @@
+.maintenance-history {
+  .text-center {
+    text-align: center;
+  }
+
+  .empty-message {
+    padding: 3rem 1rem;
+    color: #6b7280;
+
+    i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+      color: #9ca3af;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+
+  .total-label {
+    text-align: right;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .total-value {
+    font-weight: 700;
+    color: #1f2937;
+    font-size: 1rem;
+  }
+}
+
+::ng-deep {
+  .maintenance-history {
+    .p-datatable {
+      .p-datatable-thead > tr > th {
+        background-color: #f9fafb;
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: #374151;
+      }
+
+      .p-datatable-tbody > tr > td {
+        font-size: 0.875rem;
+      }
+
+      .p-datatable-tfoot > tr > td {
+        background-color: #f9fafb;
+        border-top: 2px solid #e5e7eb;
+        padding: 0.75rem;
+      }
+    }
+  }
+}

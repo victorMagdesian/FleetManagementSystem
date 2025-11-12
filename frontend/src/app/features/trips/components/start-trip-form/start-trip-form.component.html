@@ -1,0 +1,106 @@
+<p-dialog 
+  header="Iniciar Viagem"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '500px'}"
+  (onHide)="onCancel()">
+  
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="vehicleId">Veículo *</label>
+      <p-dropdown
+        id="vehicleId"
+        formControlName="vehicleId"
+        [options]="availableVehicles"
+        optionLabel="plate"
+        optionValue="id"
+        placeholder="Selecione um veículo"
+        [loading]="loadingData"
+        [filter]="true"
+        filterBy="plate,model"
+        [showClear]="true"
+        [class.ng-invalid]="vehicleIdControl?.invalid && (vehicleIdControl?.dirty || vehicleIdControl?.touched)"
+        [class.ng-dirty]="vehicleIdControl?.dirty">
+        <ng-template let-vehicle pTemplate="item">
+          <div class="vehicle-option">
+            <span class="vehicle-plate">{{ vehicle.plate }}</span>
+            <span class="vehicle-model">{{ vehicle.model }}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <small class="error-message" *ngIf="getErrorMessage('vehicleId')">
+        {{ getErrorMessage('vehicleId') }}
+      </small>
+      <small class="info-message" *ngIf="availableVehicles.length === 0 && !loadingData">
+        Nenhum veículo disponível no momento
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="driverId">Condutor *</label>
+      <p-dropdown
+        id="driverId"
+        formControlName="driverId"
+        [options]="activeDrivers"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Selecione um condutor"
+        [loading]="loadingData"
+        [filter]="true"
+        filterBy="name,licenseNumber"
+        [showClear]="true"
+        [class.ng-invalid]="driverIdControl?.invalid && (driverIdControl?.dirty || driverIdControl?.touched)"
+        [class.ng-dirty]="driverIdControl?.dirty">
+        <ng-template let-driver pTemplate="item">
+          <div class="driver-option">
+            <span class="driver-name">{{ driver.name }}</span>
+            <span class="driver-license">CNH: {{ driver.licenseNumber }}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <small class="error-message" *ngIf="getErrorMessage('driverId')">
+        {{ getErrorMessage('driverId') }}
+      </small>
+      <small class="info-message" *ngIf="activeDrivers.length === 0 && !loadingData">
+        Nenhum condutor ativo no momento
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="route">Rota *</label>
+      <input 
+        id="route"
+        type="text"
+        pInputText
+        formControlName="route"
+        placeholder="São Paulo - Rio de Janeiro"
+        [class.ng-invalid]="routeControl?.invalid && (routeControl?.dirty || routeControl?.touched)"
+        [class.ng-dirty]="routeControl?.dirty" />
+      <small class="error-message" *ngIf="getErrorMessage('route')">
+        {{ getErrorMessage('route') }}
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        pButton 
+        type="button"
+        label="Cancelar" 
+        class="p-button-text"
+        (click)="onCancel()"
+        [disabled]="loading">
+      </button>
+      <button 
+        pButton 
+        type="submit"
+        label="Iniciar Viagem"
+        icon="pi pi-play"
+        [loading]="loading"
+        [disabled]="form.invalid || availableVehicles.length === 0 || activeDrivers.length === 0">
+      </button>
+    </div>
+  </form>
+</p-dialog>

@@ -1,0 +1,76 @@
+<p-dialog 
+  [header]="dialogTitle"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '500px'}"
+  (onHide)="onCancel()">
+  
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="name">Nome *</label>
+      <input 
+        id="name"
+        type="text"
+        pInputText
+        formControlName="name"
+        placeholder="João Silva"
+        [class.ng-invalid]="nameControl?.invalid && (nameControl?.dirty || nameControl?.touched)"
+        [class.ng-dirty]="nameControl?.dirty" />
+      <small class="error-message" *ngIf="getErrorMessage('name')">
+        {{ getErrorMessage('name') }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="licenseNumber">CNH *</label>
+      <p-inputMask
+        id="licenseNumber"
+        formControlName="licenseNumber"
+        mask="99999999999"
+        placeholder="12345678900"
+        [class.ng-invalid]="licenseNumberControl?.invalid && (licenseNumberControl?.dirty || licenseNumberControl?.touched)"
+        [class.ng-dirty]="licenseNumberControl?.dirty">
+      </p-inputMask>
+      <small class="error-message" *ngIf="getErrorMessage('licenseNumber')">
+        {{ getErrorMessage('licenseNumber') }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="phone">Telefone *</label>
+      <p-inputMask
+        id="phone"
+        formControlName="phone"
+        mask="+55 (99) 99999-9999"
+        placeholder="+55 (11) 99999-9999"
+        (onComplete)="onPhoneChange($event)"
+        [class.ng-invalid]="phoneControl?.invalid && (phoneControl?.dirty || phoneControl?.touched)"
+        [class.ng-dirty]="phoneControl?.dirty">
+      </p-inputMask>
+      <small class="error-message" *ngIf="getErrorMessage('phone')">
+        {{ getErrorMessage('phone') }}
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        pButton 
+        type="button"
+        label="Cancelar" 
+        class="p-button-text"
+        (click)="onCancel()"
+        [disabled]="loading">
+      </button>
+      <button 
+        pButton 
+        type="submit"
+        [label]="isEditMode ? 'Atualizar' : 'Criar'"
+        [loading]="loading"
+        [disabled]="form.invalid && (form.dirty || form.touched)">
+      </button>
+    </div>
+  </form>
+</p-dialog>

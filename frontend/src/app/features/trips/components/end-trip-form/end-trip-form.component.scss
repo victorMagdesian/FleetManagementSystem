@@ -1,0 +1,77 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  .trip-info {
+    background-color: #f9fafb;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .label {
+        font-weight: 500;
+        color: #6b7280;
+        font-size: 0.875rem;
+      }
+
+      .value {
+        color: #1f2937;
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      font-weight: 500;
+      font-size: 0.875rem;
+      color: #374151;
+    }
+
+    ::ng-deep .p-inputnumber {
+      width: 100%;
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-size: 0.8125rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+  }
+}
+
+::ng-deep {
+  .p-dialog {
+    .p-dialog-content {
+      padding: 1.5rem;
+    }
+  }
+
+  .ng-invalid.ng-dirty,
+  .ng-invalid.ng-touched {
+    border-color: #ef4444 !important;
+  }
+}

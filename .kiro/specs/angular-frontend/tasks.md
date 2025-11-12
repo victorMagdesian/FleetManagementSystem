@@ -259,8 +259,12 @@
   - Mostrar veículo, condutor e rota
   - _Requirements: 1.3_
 
-- [ ] 10. Implementar módulo Vehicles
-- [ ] 10.1 Criar VehiclesPage component
+- [x] 10. Implementar módulo Vehicles
+
+
+- [x] 10.1 Criar VehiclesPage component
+
+
   - Implementar DataTable com todas as colunas
   - Adicionar botões de ação (editar, excluir)
   - Implementar busca por placa e modelo
@@ -268,7 +272,9 @@
   - Implementar confirmação de exclusão
   - _Requirements: 2.1, 2.2, 2.4, 2.5, 2.6, 11.1, 11.2_
 
-- [ ] 10.2 Criar VehicleForm component
+- [x] 10.2 Criar VehicleForm component
+
+
   - Implementar formulário com campos placa, modelo, ano e quilometragem
   - Adicionar validações (required, pattern, min, max)
   - Implementar modo criação e edição
@@ -277,13 +283,18 @@
   - Implementar submit com loading state
   - _Requirements: 2.2, 2.3, 2.4, 2.7, 7.1, 7.2, 7.3, 7.4, 10.1, 10.2, 10.6_
 
-- [ ] 10.3 Criar VehicleDetails component (opcional)
+- [x] 10.3 Criar VehicleDetails component (opcional)
+
   - Exibir detalhes completos do veículo
   - Mostrar histórico de manutenções
   - _Requirements: 2.1_
 
-- [ ] 11. Implementar módulo Drivers
-- [ ] 11.1 Criar DriversPage component
+- [x] 11. Implementar módulo Drivers
+
+
+- [x] 11.1 Criar DriversPage component
+
+
   - Implementar DataTable com todas as colunas
   - Adicionar botões de ação (editar, excluir, ativar/desativar)
   - Implementar busca por nome ou CNH
@@ -291,7 +302,9 @@
   - Implementar confirmação de exclusão
   - _Requirements: 3.1, 3.4, 3.5, 3.6, 11.1, 11.2_
 
-- [ ] 11.2 Criar DriverForm component
+- [x] 11.2 Criar DriverForm component
+
+
   - Implementar formulário com campos nome, CNH e telefone
   - Adicionar validações (required, CNH com 11 dígitos)
   - Implementar modo criação e edição
@@ -299,8 +312,12 @@
   - Implementar submit com loading state
   - _Requirements: 3.2, 3.3, 3.4, 3.7, 7.1, 7.2, 7.3, 7.4, 10.3, 10.6_
 
-- [ ] 12. Implementar módulo Trips
-- [ ] 12.1 Criar TripsPage component
+- [x] 12. Implementar módulo Trips
+
+
+- [x] 12.1 Criar TripsPage component
+
+
   - Implementar DataTable com todas as colunas
   - Adicionar abas para "Todas" e "Ativas"
   - Adicionar botão "Iniciar Viagem"
@@ -308,7 +325,9 @@
   - Integrar StartTripForm e EndTripForm dialogs
   - _Requirements: 4.1, 4.2, 4.4, 4.6, 11.1_
 
-- [ ] 12.2 Criar StartTripForm component
+- [x] 12.2 Criar StartTripForm component
+
+
   - Implementar formulário com dropdowns de veículos e condutores
   - Carregar apenas veículos disponíveis
   - Carregar apenas condutores ativos
@@ -317,14 +336,21 @@
   - Implementar submit com tratamento de erro 400
   - _Requirements: 4.2, 4.3, 4.7, 7.1, 7.2, 10.6_
 
-- [ ] 12.3 Criar EndTripForm component
+- [x] 12.3 Criar EndTripForm component
+
+
   - Implementar formulário com campo de distância
   - Adicionar validação de distância maior que zero
   - Implementar submit com loading state
   - _Requirements: 4.4, 4.5, 7.1, 7.2, 10.5, 10.6_
 
-- [ ] 13. Implementar módulo Maintenance
-- [ ] 13.1 Criar MaintenancePage component
+- [x] 13. Implementar módulo Maintenance
+
+
+
+- [x] 13.1 Criar MaintenancePage component
+
+
   - Implementar DataTable com todas as colunas
   - Adicionar abas para "Todas" e "Próximas"
   - Adicionar botão "Nova Manutenção"
@@ -332,13 +358,17 @@
   - Integrar MaintenanceForm dialog
   - _Requirements: 5.1, 5.2, 5.4, 5.5, 11.1_
 
-- [ ] 13.2 Criar MaintenanceForm component
+- [x] 13.2 Criar MaintenanceForm component
+
+
   - Implementar formulário com dropdown de veículos, data, descrição e custo
   - Adicionar validações (required, custo maior que zero)
   - Implementar submit com loading state
   - _Requirements: 5.2, 5.3, 7.1, 7.2, 10.4, 10.6_
 
-- [ ] 13.3 Criar MaintenanceHistory component
+- [x] 13.3 Criar MaintenanceHistory component
+
+
   - Implementar modal com histórico de manutenções do veículo
   - Exibir lista ordenada por data
   - Formatar datas e valores monetários

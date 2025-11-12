@@ -1,0 +1,63 @@
+<p-dialog 
+  header="Finalizar Viagem"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '400px'}"
+  (onHide)="onCancel()">
+  
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="trip-info" *ngIf="trip">
+      <div class="info-row">
+        <span class="label">Rota:</span>
+        <span class="value">{{ trip.route }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Veículo:</span>
+        <span class="value">{{ trip.vehicleId }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Condutor:</span>
+        <span class="value">{{ trip.driverId }}</span>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="distance">Distância Percorrida (km) *</label>
+      <p-inputNumber
+        id="distance"
+        formControlName="distance"
+        [min]="1"
+        suffix=" km"
+        placeholder="0"
+        [class.ng-invalid]="distanceControl?.invalid && (distanceControl?.dirty || distanceControl?.touched)"
+        [class.ng-dirty]="distanceControl?.dirty">
+      </p-inputNumber>
+      <small class="error-message" *ngIf="getErrorMessage('distance')">
+        {{ getErrorMessage('distance') }}
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        pButton 
+        type="button"
+        label="Cancelar" 
+        class="p-button-text"
+        (click)="onCancel()"
+        [disabled]="loading">
+      </button>
+      <button 
+        pButton 
+        type="submit"
+        label="Finalizar"
+        icon="pi pi-check"
+        class="p-button-success"
+        [loading]="loading"
+        [disabled]="form.invalid">
+      </button>
+    </div>
+  </form>
+</p-dialog>

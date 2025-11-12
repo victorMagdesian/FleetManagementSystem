@@ -1,0 +1,95 @@
+<p-dialog 
+  [header]="dialogTitle"
+  [(visible)]="visible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '500px'}"
+  (onHide)="onCancel()">
+  
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="plate">Placa *</label>
+      <input 
+        id="plate"
+        type="text"
+        pInputText
+        formControlName="plate"
+        placeholder="ABC1234"
+        [class.ng-invalid]="hasError('plate', 'required') || hasError('plate', 'pattern')"
+        [class.ng-dirty]="plateControl?.dirty" />
+      <small class="error-message" *ngIf="getErrorMessage('plate')">
+        {{ getErrorMessage('plate') }}
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="model">Modelo *</label>
+      <input 
+        id="model"
+        type="text"
+        pInputText
+        formControlName="model"
+        placeholder="Toyota Corolla"
+        [class.ng-invalid]="modelControl?.invalid && (modelControl?.dirty || modelControl?.touched)"
+        [class.ng-dirty]="modelControl?.dirty" />
+      <small class="error-message" *ngIf="getErrorMessage('model')">
+        {{ getErrorMessage('model') }}
+      </small>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="year">Ano *</label>
+        <p-inputNumber
+          id="year"
+          formControlName="year"
+          [useGrouping]="false"
+          [min]="1900"
+          [max]="2026"
+          placeholder="2023"
+          [class.ng-invalid]="yearControl?.invalid && (yearControl?.dirty || yearControl?.touched)"
+          [class.ng-dirty]="yearControl?.dirty">
+        </p-inputNumber>
+        <small class="error-message" *ngIf="getErrorMessage('year')">
+          {{ getErrorMessage('year') }}
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="mileage">Quilometragem *</label>
+        <p-inputNumber
+          id="mileage"
+          formControlName="mileage"
+          [min]="0"
+          suffix=" km"
+          placeholder="0"
+          [class.ng-invalid]="mileageControl?.invalid && (mileageControl?.dirty || mileageControl?.touched)"
+          [class.ng-dirty]="mileageControl?.dirty">
+        </p-inputNumber>
+        <small class="error-message" *ngIf="getErrorMessage('mileage')">
+          {{ getErrorMessage('mileage') }}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        pButton 
+        type="button"
+        label="Cancelar" 
+        class="p-button-text"
+        (click)="onCancel()"
+        [disabled]="loading">
+      </button>
+      <button 
+        pButton 
+        type="submit"
+        [label]="isEditMode ? 'Atualizar' : 'Criar'"
+        [loading]="loading"
+        [disabled]="form.invalid && (form.dirty || form.touched)">
+      </button>
+    </div>
+  </form>
+</p-dialog>

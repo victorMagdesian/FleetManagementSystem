@@ -1,0 +1,111 @@
+<div class="drivers-page">
+  <div class="page-header">
+    <h1>Condutores</h1>
+    <button 
+      pButton 
+      label="Novo Condutor" 
+      icon="pi pi-plus" 
+      (click)="openCreateDialog()">
+    </button>
+  </div>
+
+  <div class="search-bar">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input 
+        pInputText 
+        type="text" 
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+        placeholder="Buscar por nome ou CNH" />
+    </span>
+  </div>
+
+  <p-table 
+    [value]="filteredDrivers" 
+    [loading]="loading"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} condutores"
+    styleClass="p-datatable-striped">
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">
+          Nome <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="licenseNumber">
+          CNH <p-sortIcon field="licenseNumber"></p-sortIcon>
+        </th>
+        <th pSortableColumn="phone">
+          Telefone <p-sortIcon field="phone"></p-sortIcon>
+        </th>
+        <th pSortableColumn="active">
+          Status <p-sortIcon field="active"></p-sortIcon>
+        </th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-driver>
+      <tr>
+        <td><strong>{{ driver.name }}</strong></td>
+        <td>{{ driver.licenseNumber }}</td>
+        <td>{{ driver.phone | phoneFormat }}</td>
+        <td>
+          <p-tag 
+            [value]="driver.active ? 'Ativo' : 'Inativo'"
+            [severity]="driver.active ? 'success' : 'danger'">
+          </p-tag>
+        </td>
+        <td>
+          <div class="action-buttons">
+            <button 
+              pButton 
+              icon="pi pi-pencil" 
+              class="p-button-rounded p-button-text p-button-sm"
+              pTooltip="Editar"
+              (click)="openEditDialog(driver)">
+            </button>
+            <button 
+              pButton 
+              [icon]="driver.active ? 'pi pi-ban' : 'pi pi-check'"
+              class="p-button-rounded p-button-text p-button-sm"
+              [class.p-button-warning]="driver.active"
+              [class.p-button-success]="!driver.active"
+              [pTooltip]="driver.active ? 'Desativar' : 'Ativar'"
+              (click)="toggleDriverStatus(driver)">
+            </button>
+            <button 
+              pButton 
+              icon="pi pi-trash" 
+              class="p-button-rounded p-button-text p-button-danger p-button-sm"
+              pTooltip="Excluir"
+              (click)="confirmDelete(driver)">
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" class="text-center">
+          <div class="empty-message">
+            <i class="pi pi-users"></i>
+            <p>Nenhum condutor encontrado</p>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<app-driver-form
+  [visible]="showFormDialog"
+  [driver]="selectedDriver"
+  (onClose)="onFormClose()"
+  (onSuccess)="onFormSuccess()">
+</app-driver-form>
