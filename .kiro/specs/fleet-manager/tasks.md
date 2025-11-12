@@ -182,7 +182,7 @@
     - Configure custom mappings for enum-to-string conversions
     - _Requirements: 1.4, 2.4, 3.5, 6.4_
 
-- [ ] 7. Implement application layer - services
+- [x] 7. Implement application layer - services
 
 
 
@@ -238,7 +238,12 @@
     - Use AutoMapper for entity-DTO conversions
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 8.1, 8.2_
 
-- [ ] 8. Implement exception handling
+- [x] 8. Implement exception handling
+
+
+
+
+
   - Create custom exception classes: FleetManagerException, EntityNotFoundException, DuplicateEntityException, InvalidOperationException
   - Implement GlobalExceptionHandler to map exceptions to HTTP status codes
   - Add structured error responses with appropriate status codes
