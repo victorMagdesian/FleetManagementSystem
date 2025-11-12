@@ -1,6 +1,7 @@
-using FleetManager.Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using DomainExceptions = FleetManager.Domain.Exceptions;
+using AppExceptions = FleetManager.Application.Exceptions;
 
 namespace FleetManager.Api.Middleware;
 
@@ -22,25 +23,47 @@ public class GlobalExceptionHandler : IExceptionHandler
 
         var (statusCode, title, detail) = exception switch
         {
-            EntityNotFoundException notFoundEx => (
+            // Application layer exceptions
+            AppExceptions.EntityNotFoundException appNotFoundEx => (
                 StatusCodes.Status404NotFound,
                 "Resource Not Found",
-                notFoundEx.Message
+                appNotFoundEx.Message
             ),
-            DuplicateEntityException duplicateEx => (
+            AppExceptions.DuplicateEntityException appDuplicateEx => (
                 StatusCodes.Status409Conflict,
                 "Duplicate Resource",
-                duplicateEx.Message
+                appDuplicateEx.Message
             ),
-            Domain.Exceptions.InvalidOperationException invalidOpEx => (
+            AppExceptions.InvalidOperationException appInvalidOpEx => (
                 StatusCodes.Status400BadRequest,
                 "Invalid Operation",
-                invalidOpEx.Message
+                appInvalidOpEx.Message
             ),
-            FleetManagerException fleetEx => (
+            AppExceptions.FleetManagerException appFleetEx => (
                 StatusCodes.Status400BadRequest,
                 "Bad Request",
-                fleetEx.Message
+                appFleetEx.Message
+            ),
+            // Domain layer exceptions
+            DomainExceptions.EntityNotFoundException domainNotFoundEx => (
+                StatusCodes.Status404NotFound,
+                "Resource Not Found",
+                domainNotFoundEx.Message
+            ),
+            DomainExceptions.DuplicateEntityException domainDuplicateEx => (
+                StatusCodes.Status409Conflict,
+                "Duplicate Resource",
+                domainDuplicateEx.Message
+            ),
+            DomainExceptions.InvalidOperationException domainInvalidOpEx => (
+                StatusCodes.Status400BadRequest,
+                "Invalid Operation",
+                domainInvalidOpEx.Message
+            ),
+            DomainExceptions.FleetManagerException domainFleetEx => (
+                StatusCodes.Status400BadRequest,
+                "Bad Request",
+                domainFleetEx.Message
             ),
             _ => (
                 StatusCodes.Status500InternalServerError,

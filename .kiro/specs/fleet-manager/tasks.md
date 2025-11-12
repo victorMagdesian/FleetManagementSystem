@@ -436,8 +436,15 @@
     - Mock repository dependencies using Moq
     - _Requirements: 6.2, 6.3, 6.5, 8.1, 8.2, 10.1, 10.4_
 
-- [ ] 17. Write integration tests for API endpoints
-  - [ ] 17.1 Write VehiclesController integration tests
+- [x] 17. Write integration tests for API endpoints
+
+
+
+
+
+  - [x] 17.1 Write VehiclesController integration tests
+
+
     - Test POST /api/vehicles creates vehicle and returns 201
     - Test GET /api/vehicles returns all vehicles
     - Test GET /api/vehicles/{id} returns 404 for non-existent vehicle
@@ -446,14 +453,19 @@
     - Use WebApplicationFactory for in-memory testing
     - _Requirements: 1.1, 1.4, 10.2_
   
-  - [ ] 17.2 Write TripsController integration tests
+  - [x] 17.2 Write TripsController integration tests
+
+
     - Test POST /api/trips/start creates trip and updates vehicle status
     - Test POST /api/trips/end/{id} finalizes trip and updates mileage
     - Test validation errors return 400 Bad Request
     - Use WebApplicationFactory for in-memory testing
     - _Requirements: 6.1, 6.4, 6.5, 10.2_
   
-  - [ ] 17.3 Write MaintenanceController integration tests
+  - [x] 17.3 Write MaintenanceController integration tests
+
+
+
     - Test POST /api/maintenance creates record and updates vehicle
     - Test GET /api/maintenance/upcoming returns filtered vehicles
     - Use WebApplicationFactory for in-memory testing
