@@ -403,21 +403,33 @@
     - Test IsActive method
     - _Requirements: 6.4, 10.4_
 
-- [ ] 16. Write unit tests for application services
-  - [ ] 16.1 Write VehicleService tests
+- [x] 16. Write unit tests for application services
+
+
+
+
+
+  - [x] 16.1 Write VehicleService tests
+
+
+
     - Test CreateAsync with valid and duplicate plate scenarios
     - Test GetAvailableAsync filtering logic
     - Test GetUpcomingMaintenanceAsync date filtering
     - Mock repository dependencies using Moq
     - _Requirements: 1.2, 4.4, 7.1, 10.1, 10.4_
   
-  - [ ] 16.2 Write MaintenanceService tests
+  - [x] 16.2 Write MaintenanceService tests
+
+
     - Test CreateAsync updates vehicle maintenance dates correctly
     - Test CreateAsync updates vehicle status to InMaintenance
     - Mock repository dependencies using Moq
     - _Requirements: 3.2, 3.4, 4.1, 4.2, 8.3, 10.1, 10.4_
   
-  - [ ] 16.3 Write TripService tests
+  - [x] 16.3 Write TripService tests
+
+
     - Test StartTripAsync validates vehicle and driver availability
     - Test StartTripAsync updates vehicle status to InUse
     - Test EndTripAsync updates vehicle mileage and status
