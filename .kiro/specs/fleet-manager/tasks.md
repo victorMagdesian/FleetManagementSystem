@@ -249,8 +249,15 @@
   - Add structured error responses with appropriate status codes
   - _Requirements: 1.2, 2.2, 6.2_
 
-- [ ] 9. Implement API layer - controllers
-  - [ ] 9.1 Implement VehiclesController
+- [x] 9. Implement API layer - controllers
+
+
+
+
+
+  - [x] 9.1 Implement VehiclesController
+
+
     - Create GET /api/vehicles endpoint to list all vehicles
     - Create GET /api/vehicles/{id} endpoint to get vehicle by ID
     - Create POST /api/vehicles endpoint to create new vehicle
@@ -259,7 +266,9 @@
     - Add proper HTTP status codes and error handling
     - _Requirements: 1.1, 1.4_
   
-  - [ ] 9.2 Implement DriversController
+  - [x] 9.2 Implement DriversController
+
+
     - Create GET /api/drivers endpoint to list all drivers
     - Create GET /api/drivers/{id} endpoint to get driver by ID
     - Create GET /api/drivers/available endpoint to list available drivers
@@ -270,13 +279,17 @@
     - Add proper HTTP status codes and error handling
     - _Requirements: 2.1, 2.4, 7.2_
   
-  - [ ] 9.3 Implement MaintenanceController
+  - [x] 9.3 Implement MaintenanceController
+
+
     - Create GET /api/maintenance/upcoming endpoint to list vehicles with upcoming maintenance
     - Create POST /api/maintenance endpoint to create maintenance record
     - Add proper HTTP status codes and error handling
     - _Requirements: 3.1, 4.4_
   
-  - [ ] 9.4 Implement TripsController
+  - [x] 9.4 Implement TripsController
+
+
     - Create POST /api/trips/start endpoint to start a trip
     - Create POST /api/trips/end/{id} endpoint to end a trip
     - Create GET /api/trips endpoint to list all trips
