@@ -1,0 +1,38 @@
+<aside class="sidebar" [ngClass]="{'sidebar--collapsed': collapsed}">
+  <div class="sidebar__header">
+    <div class="sidebar__logo">
+      <i class="pi pi-car" style="font-size: 1.5rem;"></i>
+      <span class="sidebar__logo-text" *ngIf="!collapsed">FleetManager</span>
+    </div>
+    <button 
+      class="sidebar__toggle"
+      (click)="toggleCollapse()"
+      [attr.aria-label]="collapsed ? 'Expandir menu' : 'Recolher menu'">
+      <i [class]="collapsed ? 'pi pi-angle-right' : 'pi pi-angle-left'"></i>
+    </button>
+  </div>
+
+  <nav class="sidebar__nav">
+    <ul class="sidebar__menu">
+      <li 
+        *ngFor="let item of menuItems"
+        class="sidebar__menu-item">
+        <a 
+          [routerLink]="item.routerLink"
+          routerLinkActive="sidebar__menu-link--active"
+          class="sidebar__menu-link"
+          [attr.aria-label]="item.label">
+          <i [class]="item.icon" class="sidebar__menu-icon"></i>
+          <span class="sidebar__menu-label" *ngIf="!collapsed">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- Mobile overlay -->
+<div 
+  class="sidebar__overlay"
+  *ngIf="!collapsed"
+  (click)="toggleCollapse()">
+</div>

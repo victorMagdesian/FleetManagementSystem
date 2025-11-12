@@ -174,21 +174,32 @@
   - _Requirements: 8.1, 8.2, 8.3, 13.5_
 
 
-- [ ] 7. Implementar layout principal
-- [ ] 7.1 Criar componente MainLayout
+- [x] 7. Implementar layout principal
+
+
+
+
+
+- [x] 7.1 Criar componente MainLayout
+
+
   - Implementar estrutura com sidebar e área de conteúdo
   - Adicionar router-outlet para páginas
   - Adicionar p-toast para notificações
   - Adicionar p-confirmDialog para confirmações
   - _Requirements: 6.1, 6.2, 6.3, 7.1, 7.2, 12.5_
 
-- [ ] 7.2 Criar componente Header
+
+- [x] 7.2 Criar componente Header
+
   - Implementar barra superior com título da página
   - Adicionar botão de toggle do menu para mobile
   - Estilizar responsivamente
   - _Requirements: 6.3, 9.3, 12.5_
 
-- [ ] 7.3 Criar componente Sidebar
+
+- [x] 7.3 Criar componente Sidebar
+
   - Implementar menu lateral com itens de navegação
   - Adicionar ícones e labels para cada item
   - Implementar estado expandido/colapsado

@@ -1,0 +1,20 @@
+<div class="layout-wrapper">
+  <app-sidebar 
+    [menuItems]="menuItems"
+    [(collapsed)]="sidebarCollapsed">
+  </app-sidebar>
+  
+  <div class="layout-main" [ngClass]="{'layout-main--expanded': sidebarCollapsed}">
+    <app-header 
+      [title]="currentPageTitle"
+      (menuToggle)="toggleSidebar()">
+    </app-header>
+    
+    <main class="layout-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog></p-confirmDialog>
