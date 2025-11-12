@@ -9,9 +9,27 @@ using FleetManager.Infrastructure.Jobs;
 using FleetManager.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
+using Serilog;
 using StackExchange.Redis;
 
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
+        .Build())
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+try
+{
+    Log.Information("Starting FleetManager API");
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Serilog to the application
+builder.Host.UseSerilog();
 
 // Add services to the container.
 // Configure DbContext with SQL Server
@@ -141,4 +159,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Add Serilog request logging
+app.UseSerilogRequestLogging();
+
 app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

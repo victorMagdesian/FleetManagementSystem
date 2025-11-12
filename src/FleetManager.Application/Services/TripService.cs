@@ -5,6 +5,7 @@ using FleetManager.Application.Interfaces;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enums;
 using FleetManager.Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace FleetManager.Application.Services;
 
@@ -17,17 +18,20 @@ public class TripService : ITripService
     private readonly IVehicleRepository _vehicleRepository;
     private readonly IDriverRepository _driverRepository;
     private readonly IMapper _mapper;
+    private readonly ILogger<TripService> _logger;
 
     public TripService(
         ITripRepository tripRepository,
         IVehicleRepository vehicleRepository,
         IDriverRepository driverRepository,
-        IMapper mapper)
+        IMapper mapper,
+        ILogger<TripService> logger)
     {
         _tripRepository = tripRepository ?? throw new ArgumentNullException(nameof(tripRepository));
         _vehicleRepository = vehicleRepository ?? throw new ArgumentNullException(nameof(vehicleRepository));
         _driverRepository = driverRepository ?? throw new ArgumentNullException(nameof(driverRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     /// <inheritdoc />
@@ -38,10 +42,14 @@ public class TripService : ITripService
             throw new ArgumentNullException(nameof(request));
         }
 
+        _logger.LogInformation("Starting trip for vehicle: {VehicleId}, driver: {DriverId}, route: {Route}", 
+            request.VehicleId, request.DriverId, request.Route);
+
         // Validate vehicle exists
         var vehicle = await _vehicleRepository.GetByIdAsync(request.VehicleId);
         if (vehicle == null)
         {
+            _logger.LogWarning("Vehicle not found for trip: {VehicleId}", request.VehicleId);
             throw new EntityNotFoundException("Vehicle", request.VehicleId);
         }
 
@@ -49,12 +57,14 @@ public class TripService : ITripService
         var driver = await _driverRepository.GetByIdAsync(request.DriverId);
         if (driver == null)
         {
+            _logger.LogWarning("Driver not found for trip: {DriverId}", request.DriverId);
             throw new EntityNotFoundException("Driver", request.DriverId);
         }
 
         // Validate vehicle availability
         if (vehicle.Status != VehicleStatus.Available)
         {
+            _logger.LogWarning("Vehicle not available: {Plate}, Status: {Status}", vehicle.Plate, vehicle.Status);
             throw new Exceptions.InvalidOperationException(
                 $"Vehicle {vehicle.Plate} is not available. Current status: {vehicle.Status}");
         }
@@ -62,6 +72,7 @@ public class TripService : ITripService
         // Validate driver availability
         if (!driver.Active)
         {
+            _logger.LogWarning("Driver not active: {Name}", driver.Name);
             throw new Exceptions.InvalidOperationException(
                 $"Driver {driver.Name} is not active");
         }
@@ -71,6 +82,7 @@ public class TripService : ITripService
         var driverHasActiveTrip = activeTrips.Any(t => t.DriverId == request.DriverId);
         if (driverHasActiveTrip)
         {
+            _logger.LogWarning("Driver already on active trip: {Name}", driver.Name);
             throw new Exceptions.InvalidOperationException(
                 $"Driver {driver.Name} is already on an active trip");
         }
@@ -85,6 +97,9 @@ public class TripService : ITripService
         await _tripRepository.AddAsync(trip);
         await _vehicleRepository.UpdateAsync(vehicle);
 
+        _logger.LogInformation("Trip started successfully: {TripId}, Vehicle: {Plate}, Driver: {DriverName}", 
+            trip.Id, vehicle.Plate, driver.Name);
+
         return _mapper.Map<TripResponse>(trip);
     }
 
@@ -96,10 +111,13 @@ public class TripService : ITripService
             throw new ArgumentNullException(nameof(request));
         }
 
+        _logger.LogInformation("Ending trip: {TripId}, Distance: {Distance} km", tripId, request.Distance);
+
         // Validate trip exists
         var trip = await _tripRepository.GetByIdAsync(tripId);
         if (trip == null)
         {
+            _logger.LogWarning("Trip not found: {TripId}", tripId);
             throw new EntityNotFoundException("Trip", tripId);
         }
 
@@ -107,6 +125,7 @@ public class TripService : ITripService
         var vehicle = await _vehicleRepository.GetByIdAsync(trip.VehicleId);
         if (vehicle == null)
         {
+            _logger.LogWarning("Vehicle not found for trip: {VehicleId}", trip.VehicleId);
             throw new EntityNotFoundException("Vehicle", trip.VehicleId);
         }
 
@@ -119,6 +138,9 @@ public class TripService : ITripService
         // Save changes
         await _tripRepository.UpdateAsync(trip);
         await _vehicleRepository.UpdateAsync(vehicle);
+
+        _logger.LogInformation("Trip ended successfully: {TripId}, Vehicle: {Plate}, Distance: {Distance} km, New mileage: {Mileage} km", 
+            tripId, vehicle.Plate, request.Distance, vehicle.Mileage);
 
         return _mapper.Map<TripResponse>(trip);
     }

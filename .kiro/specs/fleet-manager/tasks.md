@@ -348,7 +348,12 @@
   - Configure Redis connection in Program.cs
   - _Requirements: 7.1, 7.2_
 
-- [ ] 13. Configure logging with Serilog
+- [x] 13. Configure logging with Serilog
+
+
+
+
+
   - Install Serilog packages (Serilog.AspNetCore, Serilog.Sinks.Console, Serilog.Sinks.Seq)
   - Configure Serilog in Program.cs with Console and Seq sinks
   - Add structured logging to all services and jobs

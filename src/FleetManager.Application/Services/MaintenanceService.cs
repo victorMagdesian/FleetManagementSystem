@@ -5,6 +5,7 @@ using FleetManager.Application.Interfaces;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace FleetManager.Application.Services;
 
@@ -16,17 +17,20 @@ public class MaintenanceService : IMaintenanceService
     private readonly IMaintenanceRecordRepository _maintenanceRecordRepository;
     private readonly IVehicleRepository _vehicleRepository;
     private readonly IMapper _mapper;
+    private readonly ILogger<MaintenanceService> _logger;
     private readonly int _defaultMaintenanceIntervalDays;
 
     public MaintenanceService(
         IMaintenanceRecordRepository maintenanceRecordRepository,
         IVehicleRepository vehicleRepository,
         IMapper mapper,
+        ILogger<MaintenanceService> logger,
         IConfiguration configuration)
     {
         _maintenanceRecordRepository = maintenanceRecordRepository ?? throw new ArgumentNullException(nameof(maintenanceRecordRepository));
         _vehicleRepository = vehicleRepository ?? throw new ArgumentNullException(nameof(vehicleRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         
         // Get maintenance interval from configuration, default to 90 days if not configured
         _defaultMaintenanceIntervalDays = configuration?.GetValue<int>("Maintenance:DefaultIntervalDays") ?? 90;
@@ -40,10 +44,13 @@ public class MaintenanceService : IMaintenanceService
             throw new ArgumentNullException(nameof(request));
         }
 
+        _logger.LogInformation("Creating maintenance record for vehicle: {VehicleId}", request.VehicleId);
+
         // Validate that the vehicle exists
         var vehicle = await _vehicleRepository.GetByIdAsync(request.VehicleId);
         if (vehicle == null)
         {
+            _logger.LogWarning("Vehicle not found for maintenance record: {VehicleId}", request.VehicleId);
             throw new EntityNotFoundException("Vehicle", request.VehicleId);
         }
 
@@ -51,9 +58,15 @@ public class MaintenanceService : IMaintenanceService
         var maintenanceRecord = _mapper.Map<MaintenanceRecord>(request);
         await _maintenanceRecordRepository.AddAsync(maintenanceRecord);
 
+        _logger.LogInformation("Maintenance record created: {MaintenanceRecordId}, Cost: {Cost:C}", 
+            maintenanceRecord.Id, maintenanceRecord.Cost);
+
         // Update vehicle: start maintenance, complete it with the maintenance date
         vehicle.StartMaintenance();
         vehicle.CompleteMaintenance(request.Date, _defaultMaintenanceIntervalDays);
+
+        _logger.LogInformation("Vehicle maintenance status updated: {VehicleId}, Next maintenance: {NextMaintenanceDate:yyyy-MM-dd}", 
+            vehicle.Id, vehicle.NextMaintenanceDate);
 
         // Persist vehicle changes
         await _vehicleRepository.UpdateAsync(vehicle);
