@@ -107,8 +107,14 @@
   - Usar componente Badge internamente
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 12.3_
 
-- [ ] 5. Implementar componentes Atomic Design - Organismos
-- [ ] 5.1 Criar componente DataTable
+- [x] 5. Implementar componentes Atomic Design - Organismos
+
+
+
+
+- [x] 5.1 Criar componente DataTable
+
+
   - Implementar wrapper do p-table com header customizado
   - Integrar SearchBox no header
   - Integrar Button para adicionar no header
@@ -116,14 +122,18 @@
   - Implementar filtro global
   - _Requirements: 2.1, 2.6, 3.1, 4.1, 5.1, 7.3, 11.2, 12.4_
 
-- [ ] 5.2 Criar componente FormDialog
+- [x] 5.2 Criar componente FormDialog
+
+
   - Implementar wrapper do p-dialog
   - Adicionar footer com botões Cancelar e Salvar
   - Adicionar loading state no botão Salvar
   - Controlar habilitação do botão baseado em validação
   - _Requirements: 2.2, 2.4, 3.2, 3.4, 4.2, 4.4, 5.2, 7.3, 10.6, 12.4_
 
-- [ ] 5.3 Criar componente StatsCard
+- [x] 5.3 Criar componente StatsCard
+
+
   - Implementar card com ícone, valor e label
   - Adicionar suporte a diferentes cores
   - Estilizar com SCSS responsivo

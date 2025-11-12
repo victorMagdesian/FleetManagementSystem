@@ -1,0 +1,33 @@
+<p-dialog 
+  [header]="title"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{width: width}"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onHide()">
+  
+  <div class="form-dialog-content">
+    <ng-content></ng-content>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <div class="form-dialog-footer">
+      <app-button 
+        [label]="cancelButtonLabel"
+        severity="secondary"
+        icon="pi pi-times"
+        [disabled]="loading"
+        (clicked)="onCancel()">
+      </app-button>
+      <app-button 
+        [label]="saveButtonLabel"
+        severity="primary"
+        icon="pi pi-check"
+        [loading]="loading"
+        [disabled]="!isValid"
+        (clicked)="onSave()">
+      </app-button>
+    </div>
+  </ng-template>
+</p-dialog>

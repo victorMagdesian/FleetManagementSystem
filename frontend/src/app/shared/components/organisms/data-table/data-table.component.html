@@ -1,0 +1,45 @@
+<div class="data-table-container">
+  <div class="table-header">
+    <app-search-box 
+      *ngIf="showSearchBox"
+      [placeholder]="searchPlaceholder"
+      (search)="onSearch($event)">
+    </app-search-box>
+    
+    <app-button 
+      *ngIf="showAddButton"
+      [label]="addButtonLabel"
+      icon="pi pi-plus"
+      (clicked)="onAdd()">
+    </app-button>
+  </div>
+  
+  <p-table 
+    [value]="data"
+    [loading]="loading"
+    [paginator]="paginator"
+    [rows]="rows"
+    [globalFilterFields]="filterFields"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+    styleClass="p-datatable-striped"
+    responsiveLayout="scroll">
+    
+    <ng-template pTemplate="header">
+      <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+      <ng-container *ngTemplateOutlet="bodyTemplate; context: { $implicit: rowData, rowIndex: rowIndex }"></ng-container>
+    </ng-template>
+    
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="100%" class="text-center">
+          Nenhum registro encontrado
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

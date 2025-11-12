@@ -1,0 +1,11 @@
+<p-card class="stats-card" [ngClass]="'stats-card--' + color">
+  <div class="stats-card__content">
+    <div class="stats-card__icon">
+      <app-icon [name]="icon" [size]="'2rem'"></app-icon>
+    </div>
+    <div class="stats-card__info">
+      <h3 class="stats-card__value">{{ value }}</h3>
+      <p class="stats-card__label">{{ label }}</p>
+    </div>
+  </div>
+</p-card>
