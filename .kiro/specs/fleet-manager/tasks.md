@@ -86,12 +86,22 @@
   - _Requirements: 9.2_
 
 - [ ] 4. Implement infrastructure layer - database setup
-  - [ ] 4.1 Create FleetManagerDbContext
+  - [x] 4.1 Create FleetManagerDbContext
+
+
+
+
+
     - Define DbContext with DbSet properties for all entities
     - Configure OnModelCreating to apply entity configurations
     - _Requirements: 1.5, 2.5, 3.5_
   
-  - [ ] 4.2 Create entity configurations
+  - [x] 4.2 Create entity configurations
+
+
+
+
+
     - Implement VehicleConfiguration with property constraints, indexes, and relationships
     - Implement DriverConfiguration with property constraints and indexes
     - Implement MaintenanceRecordConfiguration with relationships
