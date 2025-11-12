@@ -224,7 +224,12 @@
     - Use AutoMapper for entity-DTO conversions
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 4.1, 4.2, 8.3_
   
-  - [ ] 7.4 Implement TripService
+  - [x] 7.4 Implement TripService
+
+
+
+
+
     - Implement StartTripAsync with vehicle and driver availability validation
     - Update vehicle status to InUse when trip starts
     - Implement EndTripAsync to finalize trip, calculate distance, update mileage
