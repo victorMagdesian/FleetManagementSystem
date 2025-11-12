@@ -60,6 +60,8 @@ public class Vehicle
     // Private constructor for EF Core
     private Vehicle()
     {
+        Plate = string.Empty;
+        Model = string.Empty;
         MaintenanceRecords = new List<MaintenanceRecord>();
         Trips = new List<Trip>();
     }
