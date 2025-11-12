@@ -1,6 +1,11 @@
 # Plano de Implementação - FleetManager Frontend
 
-- [ ] 1. Configurar projeto Angular e dependências
+- [x] 1. Configurar projeto Angular e dependências
+
+
+
+
+
   - Criar novo projeto Angular 18 com standalone components
   - Instalar e configurar PrimeNG, PrimeIcons e PrimeFlex
   - Configurar SCSS e variáveis de estilo

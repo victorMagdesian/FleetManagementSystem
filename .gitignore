@@ -485,3 +485,15 @@ test-results/
 *.user
 *.userosscache
 *.sln.docstates
+
+# Angular
+frontend/dist/
+frontend/.angular/
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/coverage/
+frontend/libpeerconnection.log
+frontend/testem.log
+frontend/typings/
+frontend/npm-debug.log
+frontend/yarn-error.log
