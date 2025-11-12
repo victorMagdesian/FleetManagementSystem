@@ -73,7 +73,12 @@
     - Add navigation properties to Vehicle and Driver
     - _Requirements: 6.3, 6.4, 6.5_
 
-- [ ] 3. Define repository interfaces in domain layer
+- [x] 3. Define repository interfaces in domain layer
+
+
+
+
+
   - Create IVehicleRepository interface with methods: GetByIdAsync, GetAllAsync, GetAvailableAsync, GetVehiclesWithUpcomingMaintenanceAsync, GetByPlateAsync, AddAsync, UpdateAsync, DeleteAsync
   - Create IDriverRepository interface with methods: GetByIdAsync, GetAllAsync, GetAvailableAsync, GetByLicenseNumberAsync, AddAsync, UpdateAsync, DeleteAsync
   - Create IMaintenanceRecordRepository interface with methods: GetByIdAsync, GetByVehicleIdAsync, AddAsync
