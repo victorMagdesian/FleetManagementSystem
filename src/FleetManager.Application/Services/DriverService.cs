@@ -14,11 +14,14 @@ public class DriverService : IDriverService
 {
     private readonly IDriverRepository _driverRepository;
     private readonly IMapper _mapper;
+    private readonly ICacheService? _cacheService;
+    private const string AvailableDriversCacheKey = "drivers:available";
 
-    public DriverService(IDriverRepository driverRepository, IMapper mapper)
+    public DriverService(IDriverRepository driverRepository, IMapper mapper, ICacheService? cacheService = null)
     {
         _driverRepository = driverRepository ?? throw new ArgumentNullException(nameof(driverRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _cacheService = cacheService;
     }
 
     /// <inheritdoc />
@@ -44,8 +47,27 @@ public class DriverService : IDriverService
     /// <inheritdoc />
     public async Task<IEnumerable<DriverResponse>> GetAvailableAsync()
     {
+        // Try to get from cache if caching is enabled
+        if (_cacheService != null)
+        {
+            var cachedDrivers = await _cacheService.GetAsync<IEnumerable<DriverResponse>>(AvailableDriversCacheKey);
+            if (cachedDrivers != null)
+            {
+                return cachedDrivers;
+            }
+        }
+
+        // Get from repository
         var drivers = await _driverRepository.GetAvailableAsync();
-        return _mapper.Map<IEnumerable<DriverResponse>>(drivers);
+        var result = _mapper.Map<IEnumerable<DriverResponse>>(drivers);
+
+        // Cache the result if caching is enabled
+        if (_cacheService != null)
+        {
+            await _cacheService.SetAsync(AvailableDriversCacheKey, result, 5);
+        }
+
+        return result;
     }
 
     /// <inheritdoc />
@@ -68,6 +90,12 @@ public class DriverService : IDriverService
         
         // Add to repository
         await _driverRepository.AddAsync(driver);
+
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableDriversCacheKey);
+        }
 
         return _mapper.Map<DriverResponse>(driver);
     }
@@ -92,6 +120,12 @@ public class DriverService : IDriverService
 
         await _driverRepository.UpdateAsync(driver);
 
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableDriversCacheKey);
+        }
+
         return _mapper.Map<DriverResponse>(driver);
     }
 
@@ -106,6 +140,12 @@ public class DriverService : IDriverService
         }
 
         await _driverRepository.DeleteAsync(id);
+
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableDriversCacheKey);
+        }
     }
 
     /// <inheritdoc />
@@ -120,6 +160,12 @@ public class DriverService : IDriverService
 
         driver.Activate();
         await _driverRepository.UpdateAsync(driver);
+
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableDriversCacheKey);
+        }
 
         return _mapper.Map<DriverResponse>(driver);
     }
@@ -136,6 +182,12 @@ public class DriverService : IDriverService
 
         driver.Deactivate();
         await _driverRepository.UpdateAsync(driver);
+
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableDriversCacheKey);
+        }
 
         return _mapper.Map<DriverResponse>(driver);
     }

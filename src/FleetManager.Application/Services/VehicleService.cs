@@ -14,11 +14,14 @@ public class VehicleService : IVehicleService
 {
     private readonly IVehicleRepository _vehicleRepository;
     private readonly IMapper _mapper;
+    private readonly ICacheService? _cacheService;
+    private const string AvailableVehiclesCacheKey = "vehicles:available";
 
-    public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper)
+    public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper, ICacheService? cacheService = null)
     {
         _vehicleRepository = vehicleRepository ?? throw new ArgumentNullException(nameof(vehicleRepository));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _cacheService = cacheService;
     }
 
     /// <inheritdoc />
@@ -44,8 +47,27 @@ public class VehicleService : IVehicleService
     /// <inheritdoc />
     public async Task<IEnumerable<VehicleResponse>> GetAvailableAsync()
     {
+        // Try to get from cache if caching is enabled
+        if (_cacheService != null)
+        {
+            var cachedVehicles = await _cacheService.GetAsync<IEnumerable<VehicleResponse>>(AvailableVehiclesCacheKey);
+            if (cachedVehicles != null)
+            {
+                return cachedVehicles;
+            }
+        }
+
+        // Get from repository
         var vehicles = await _vehicleRepository.GetAvailableAsync();
-        return _mapper.Map<IEnumerable<VehicleResponse>>(vehicles);
+        var result = _mapper.Map<IEnumerable<VehicleResponse>>(vehicles);
+
+        // Cache the result if caching is enabled
+        if (_cacheService != null)
+        {
+            await _cacheService.SetAsync(AvailableVehiclesCacheKey, result, 5);
+        }
+
+        return result;
     }
 
     /// <inheritdoc />
@@ -81,6 +103,12 @@ public class VehicleService : IVehicleService
         // Add to repository
         await _vehicleRepository.AddAsync(vehicle);
 
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableVehiclesCacheKey);
+        }
+
         return _mapper.Map<VehicleResponse>(vehicle);
     }
 
@@ -113,6 +141,12 @@ public class VehicleService : IVehicleService
 
         await _vehicleRepository.UpdateAsync(vehicle);
 
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableVehiclesCacheKey);
+        }
+
         return _mapper.Map<VehicleResponse>(vehicle);
     }
 
@@ -127,5 +161,11 @@ public class VehicleService : IVehicleService
         }
 
         await _vehicleRepository.DeleteAsync(id);
+
+        // Invalidate cache
+        if (_cacheService != null)
+        {
+            await _cacheService.RemoveAsync(AvailableVehiclesCacheKey);
+        }
     }
 }

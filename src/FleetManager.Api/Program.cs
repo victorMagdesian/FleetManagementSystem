@@ -3,11 +3,13 @@ using FleetManager.Application.Interfaces;
 using FleetManager.Application.Mappings;
 using FleetManager.Application.Services;
 using FleetManager.Domain.Interfaces;
+using FleetManager.Infrastructure.Cache;
 using FleetManager.Infrastructure.Data;
 using FleetManager.Infrastructure.Jobs;
 using FleetManager.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure DbContext with SQL Server
 builder.Services.AddDbContext<FleetManagerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configure Redis
+var redisConnectionString = builder.Configuration.GetConnectionString("Redis");
+if (!string.IsNullOrEmpty(redisConnectionString))
+{
+    builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+    {
+        var configuration = ConfigurationOptions.Parse(redisConnectionString);
+        configuration.AbortOnConnectFail = false;
+        return ConnectionMultiplexer.Connect(configuration);
+    });
+    builder.Services.AddSingleton<ICacheService, RedisCacheService>();
+}
 
 // Register Repositories
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();

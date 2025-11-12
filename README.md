@@ -94,8 +94,40 @@ FleetManager.Tests
 
 ### Pré-requisitos
 - .NET 8 SDK
-- SQL Server
-- Redis (opcional, para caching)
+- Docker e Docker Compose (recomendado)
+
+### Opção 1: Usando Docker Compose (Recomendado)
+
+1. Iniciar os containers (SQL Server + Redis):
+```bash
+docker-compose up -d
+```
+
+2. Verificar se os containers estão rodando:
+```bash
+docker-compose ps
+```
+
+3. Executar a API:
+```bash
+dotnet run --project src/FleetManager.Api
+```
+
+4. Parar os containers:
+```bash
+docker-compose down
+```
+
+5. Parar e remover volumes (limpar dados):
+```bash
+docker-compose down -v
+```
+
+### Opção 2: Instalação Local
+
+Se preferir instalar SQL Server e Redis localmente:
+- SQL Server 2022 ou superior
+- Redis 7 ou superior
 
 ### Build
 ```bash
@@ -111,6 +143,11 @@ dotnet test
 ```bash
 dotnet run --project src/FleetManager.Api
 ```
+
+A API estará disponível em:
+- HTTP: http://localhost:5000
+- HTTPS: https://localhost:5001
+- Swagger: http://localhost:5000/swagger
 
 ## Próximos Passos
 

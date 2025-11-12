@@ -334,7 +334,12 @@
   - Add CORS policy if needed
   - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-- [ ] 12. Implement Redis caching (optional enhancement)
+- [x] 12. Implement Redis caching (optional enhancement)
+
+
+
+
+
   - Create ICacheService interface
   - Implement RedisCacheService using StackExchange.Redis
   - Add caching to VehicleService.GetAvailableAsync method
