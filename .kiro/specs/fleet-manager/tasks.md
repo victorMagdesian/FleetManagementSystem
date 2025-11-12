@@ -162,7 +162,7 @@
 
 
 
-  - [ ] 6.1 Create request DTOs
+  - [x] 6.1 Create request DTOs
     - Create CreateVehicleRequest, UpdateVehicleRequest records
     - Create CreateDriverRequest record
     - Create CreateMaintenanceRecordRequest record
@@ -173,24 +173,37 @@
   
 
 
-  - [ ] 6.2 Create response DTOs
+  - [x] 6.2 Create response DTOs
     - Create VehicleResponse, DriverResponse, MaintenanceRecordResponse, TripResponse records
     - _Requirements: 1.4, 2.4, 3.5, 6.4_
   
-  - [ ] 6.3 Create AutoMapper profiles
+  - [x] 6.3 Create AutoMapper profiles
     - Create mapping profiles for all entity-to-DTO conversions
     - Configure custom mappings for enum-to-string conversions
     - _Requirements: 1.4, 2.4, 3.5, 6.4_
 
 - [ ] 7. Implement application layer - services
-  - [ ] 7.1 Implement VehicleService
+
+
+
+  - [x] 7.1 Implement VehicleService
+
+
+
+
+
     - Implement GetByIdAsync, GetAllAsync, GetAvailableAsync, GetUpcomingMaintenanceAsync methods
     - Implement CreateAsync with plate uniqueness validation
     - Implement UpdateAsync and DeleteAsync methods
     - Use AutoMapper for entity-DTO conversions
     - _Requirements: 1.1, 1.2, 1.4, 4.4, 7.1, 7.3_
   
-  - [ ] 7.2 Implement DriverService
+  - [x] 7.2 Implement DriverService
+
+
+
+
+
     - Implement GetByIdAsync, GetAllAsync, GetAvailableAsync methods
     - Implement CreateAsync with license number uniqueness validation
     - Implement UpdateAsync, DeleteAsync, ActivateAsync, DeactivateAsync methods
