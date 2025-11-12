@@ -133,7 +133,7 @@
   
 
 
-  - [ ] 5.2 Implement DriverRepository
+  - [x] 5.2 Implement DriverRepository
     - Implement all IDriverRepository methods using EF Core
     - Implement GetAvailableAsync filtering by Active status
     - Include proper error handling and null checks
@@ -148,20 +148,31 @@
     - Include proper error handling and null checks
     - _Requirements: 3.1, 3.5_
   
-  - [ ] 5.4 Implement TripRepository
+  - [x] 5.4 Implement TripRepository
     - Implement all ITripRepository methods using EF Core
     - Implement GetActiveTripsAsync filtering by null EndDate
     - Include proper error handling and null checks
     - _Requirements: 6.1_
 
-- [ ] 6. Implement application layer - DTOs and mappings
+- [x] 6. Implement application layer - DTOs and mappings
+
+
+
+
+
+
+
   - [ ] 6.1 Create request DTOs
     - Create CreateVehicleRequest, UpdateVehicleRequest records
     - Create CreateDriverRequest record
     - Create CreateMaintenanceRecordRequest record
     - Create StartTripRequest, EndTripRequest records
+
+
     - _Requirements: 1.1, 2.1, 3.1, 6.1_
   
+
+
   - [ ] 6.2 Create response DTOs
     - Create VehicleResponse, DriverResponse, MaintenanceRecordResponse, TripResponse records
     - _Requirements: 1.4, 2.4, 3.5, 6.4_
