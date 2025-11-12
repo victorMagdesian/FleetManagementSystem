@@ -374,20 +374,31 @@
   - Test Docker Compose build and run
   - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-- [ ] 15. Write unit tests for domain entities
-  - [ ] 15.1 Write Vehicle entity tests
+- [x] 15. Write unit tests for domain entities
+
+
+
+
+
+  - [x] 15.1 Write Vehicle entity tests
+
+
     - Test UpdateMileage method
     - Test status transition methods (StartTrip, EndTrip, StartMaintenance, CompleteMaintenance)
     - Test CalculateNextMaintenanceDate method
     - Test IsMaintenanceDue method with various date scenarios
     - _Requirements: 4.1, 4.2, 8.1, 8.2, 8.3, 8.4, 10.4_
   
-  - [ ] 15.2 Write Driver entity tests
+  - [x] 15.2 Write Driver entity tests
+
+
     - Test Activate and Deactivate methods
     - Test IsAvailable method
     - _Requirements: 2.5, 10.4_
   
-  - [ ] 15.3 Write Trip entity tests
+  - [x] 15.3 Write Trip entity tests
+
+
     - Test End method
     - Test IsActive method
     - _Requirements: 6.4, 10.4_
