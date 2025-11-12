@@ -1,0 +1,59 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  &--xs {
+    font-size: 0.75rem;
+  }
+  
+  &--sm {
+    font-size: 1rem;
+  }
+  
+  &--md {
+    font-size: 1.25rem;
+  }
+  
+  &--lg {
+    font-size: 1.5rem;
+  }
+  
+  &--xl {
+    font-size: 2rem;
+  }
+  
+  &--primary {
+    color: #3B82F6;
+  }
+  
+  &--success {
+    color: #10B981;
+  }
+  
+  &--warning {
+    color: #F59E0B;
+  }
+  
+  &--danger {
+    color: #EF4444;
+  }
+  
+  &--secondary {
+    color: #6B7280;
+  }
+  
+  &--muted {
+    color: #9CA3AF;
+  }
+  
+  &--white {
+    color: #ffffff;
+  }
+}

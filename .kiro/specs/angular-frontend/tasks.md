@@ -46,19 +46,30 @@
   - Configurar interceptors no app.config
   - _Requirements: 7.2, 7.3, 14.1, 14.2, 14.3, 14.4, 14.5_
 
-- [ ] 3. Implementar componentes Atomic Design - Átomos
-- [ ] 3.1 Criar componente Button
+- [x] 3. Implementar componentes Atomic Design - Átomos
+
+
+
+
+
+- [x] 3.1 Criar componente Button
+
+
   - Implementar wrapper do p-button com inputs customizados
   - Adicionar suporte a loading e disabled states
   - Adicionar tooltips
   - _Requirements: 7.5, 12.2_
 
-- [ ] 3.2 Criar componente Badge
+- [x] 3.2 Criar componente Badge
+
+
   - Implementar wrapper do p-tag
   - Adicionar suporte a diferentes severities
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 12.2_
 
-- [ ] 3.3 Criar componente Icon
+- [x] 3.3 Criar componente Icon
+
+
   - Implementar wrapper para PrimeIcons
   - Adicionar suporte a tamanhos e cores
   - _Requirements: 12.2_

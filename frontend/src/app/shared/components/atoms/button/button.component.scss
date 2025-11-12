@@ -1,0 +1,11 @@
+:host {
+  display: inline-block;
+}
+
+::ng-deep {
+  .p-button {
+    &:focus {
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary-color), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+  }
+}
