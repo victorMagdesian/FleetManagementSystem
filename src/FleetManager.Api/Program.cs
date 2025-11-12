@@ -94,7 +94,7 @@ builder.Services.AddCors(options =>
 
     options.AddPolicy("Development", policy =>
     {
-        policy.WithOrigins("http://localhost:5000", "https://localhost:5001", "http://localhost:3000")
+        policy.WithOrigins("http://localhost:5000", "https://localhost:5001", "http://localhost:3000", "http://localhost:4200")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();
@@ -135,6 +135,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
 
+// CORS must be before UseHttpsRedirection and UseAuthorization
+// Using AllowAll policy for development to avoid CORS issues
+app.UseCors("AllowAll");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -143,14 +147,6 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "FleetManager API v1");
         options.RoutePrefix = "swagger";
     });
-    
-    // Use Development CORS policy
-    app.UseCors("Development");
-}
-else
-{
-    // Use AllowAll CORS policy in production (configure as needed)
-    app.UseCors("AllowAll");
 }
 
 app.UseHttpsRedirection();

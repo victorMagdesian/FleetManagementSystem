@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService } from 'primeng/api';
 import { VehicleService, ToastService } from '../../../../core/services';
 import { Vehicle } from '../../../../core/models';
@@ -20,6 +21,7 @@ import { DateFormatPipe } from '../../../../shared/pipes';
     TableModule,
     ButtonModule,
     InputTextModule,
+    TooltipModule,
     StatusBadgeComponent,
     VehicleFormComponent,
     DateFormatPipe

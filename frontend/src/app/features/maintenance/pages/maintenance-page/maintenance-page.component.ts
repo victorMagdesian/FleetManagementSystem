@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 import { MaintenanceService, VehicleService, ToastService } from '../../../../core/services';
 import { Maintenance, Vehicle } from '../../../../core/models';
 import { MaintenanceFormComponent } from '../../components/maintenance-form/maintenance-form.component';
@@ -17,6 +18,7 @@ import { DateFormatPipe, CurrencyFormatPipe } from '../../../../shared/pipes';
     TableModule,
     ButtonModule,
     TabViewModule,
+    TooltipModule,
     MaintenanceFormComponent,
     MaintenanceHistoryComponent,
     DateFormatPipe,

@@ -62,7 +62,7 @@ export class DriverFormComponent implements OnChanges {
       ]],
       phone: ['', [
         Validators.required,
-        Validators.pattern(/^\+55\d{11}$/)
+        Validators.pattern(/^\+55\s?\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/)
       ]]
     });
   }
@@ -128,7 +128,7 @@ export class DriverFormComponent implements OnChanges {
 
     if (controlName === 'phone') {
       if (control.hasError('pattern')) {
-        return 'Formato inválido (ex: +5511999999999)';
+        return 'Formato inválido (ex: +55 (11) 99999-9999)';
       }
     }
 
@@ -136,14 +136,8 @@ export class DriverFormComponent implements OnChanges {
   }
 
   onPhoneChange(event: any): void {
-    // Remove formatting and keep only digits with +55 prefix
-    let value = event.target.value.replace(/\D/g, '');
-    if (value.startsWith('55')) {
-      value = '+' + value;
-    } else if (!value.startsWith('+55')) {
-      value = '+55' + value;
-    }
-    this.form.patchValue({ phone: value }, { emitEvent: false });
+    // This method is called when the mask is complete
+    // The normalization happens in onSubmit, so we don't need to do anything here
   }
 
   onSubmit(): void {
@@ -161,8 +155,25 @@ export class DriverFormComponent implements OnChanges {
     }
   }
 
+  private normalizePhone(phone: string): string {
+    // Remove all non-digit characters except +
+    const cleaned = phone.replace(/[^\d+]/g, '');
+    // Ensure it starts with +55
+    if (cleaned.startsWith('+55')) {
+      return cleaned;
+    } else if (cleaned.startsWith('55')) {
+      return '+' + cleaned;
+    } else {
+      return '+55' + cleaned;
+    }
+  }
+
   private createDriver(): void {
-    const request: CreateDriverRequest = this.form.value;
+    const formValue = this.form.value;
+    const request: CreateDriverRequest = {
+      ...formValue,
+      phone: this.normalizePhone(formValue.phone)
+    };
     
     this.driverService.create(request).subscribe({
       next: () => {
@@ -181,7 +192,11 @@ export class DriverFormComponent implements OnChanges {
   private updateDriver(): void {
     if (!this.driver) return;
 
-    const request: UpdateDriverRequest = this.form.value;
+    const formValue = this.form.value;
+    const request: UpdateDriverRequest = {
+      ...formValue,
+      phone: this.normalizePhone(formValue.phone)
+    };
 
     this.driverService.update(this.driver.id, request).subscribe({
       next: () => {

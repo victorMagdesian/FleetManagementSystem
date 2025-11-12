@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
+import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService } from 'primeng/api';
 import { DriverService, ToastService } from '../../../../core/services';
 import { Driver } from '../../../../core/models';
@@ -21,6 +22,7 @@ import { PhoneFormatPipe } from '../../../../shared/pipes';
     ButtonModule,
     InputTextModule,
     TagModule,
+    TooltipModule,
     DriverFormComponent,
     PhoneFormatPipe
   ],
