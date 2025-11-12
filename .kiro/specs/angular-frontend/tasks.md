@@ -13,15 +13,23 @@
   - Configurar environment files com URL da API
   - _Requirements: 12.1, 13.4_
 
-- [ ] 2. Implementar estrutura core do projeto
-- [ ] 2.1 Criar modelos de dados TypeScript
+- [x] 2. Implementar estrutura core do projeto
+
+
+
+
+- [x] 2.1 Criar modelos de dados TypeScript
+
+
   - Criar interfaces para Vehicle, Driver, Trip, Maintenance
   - Criar enums para VehicleStatus
   - Criar interfaces para requests (Create/Update)
   - Criar interface DashboardStats
   - _Requirements: 1.1, 2.1, 3.1, 4.1, 5.1_
 
-- [ ] 2.2 Implementar serviços de API
+- [x] 2.2 Implementar serviços de API
+
+
   - Criar ApiService base com métodos HTTP genéricos
   - Criar VehicleService com todos os endpoints
   - Criar DriverService com todos os endpoints
@@ -30,7 +38,9 @@
   - Criar ToastService para notificações
   - _Requirements: 7.1, 7.2, 14.1, 14.2, 14.3, 14.4_
 
-- [ ] 2.3 Implementar interceptors HTTP
+- [x] 2.3 Implementar interceptors HTTP
+
+
   - Criar ErrorInterceptor para tratamento global de erros
   - Criar LoadingInterceptor para controle de loading state
   - Configurar interceptors no app.config
