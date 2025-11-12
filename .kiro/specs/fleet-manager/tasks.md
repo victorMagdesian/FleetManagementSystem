@@ -16,30 +16,57 @@
   - Add required NuGet packages to each project
   - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-- [ ] 2. Implement domain layer entities and enums
-  - [ ] 2.1 Create VehicleStatus enum
+- [x] 2. Implement domain layer entities and enums
+
+
+  - [x] 2.1 Create VehicleStatus enum
+
+
+
+
+
     - Define Available, InUse, and InMaintenance status values
     - _Requirements: 1.3, 8.1, 8.2, 8.3_
   
-  - [ ] 2.2 Implement Vehicle entity with business logic
+  - [x] 2.2 Implement Vehicle entity with business logic
+
+
+
+
+
     - Create Vehicle entity with all properties (Id, Plate, Model, Year, Mileage, LastMaintenanceDate, NextMaintenanceDate, Status)
     - Implement UpdateMileage, StartTrip, EndTrip, StartMaintenance, CompleteMaintenance methods
     - Implement CalculateNextMaintenanceDate and IsMaintenanceDue methods
     - Add navigation properties for MaintenanceRecords and Trips
     - _Requirements: 1.3, 4.1, 4.2, 4.3, 8.1, 8.2, 8.3, 8.4_
   
-  - [ ] 2.3 Implement Driver entity with business logic
+  - [x] 2.3 Implement Driver entity with business logic
+
+
+
+
+
     - Create Driver entity with all properties (Id, Name, LicenseNumber, Phone, Active)
     - Implement Activate, Deactivate, and IsAvailable methods
     - Add navigation property for Trips
     - _Requirements: 2.3, 2.5_
   
-  - [ ] 2.4 Implement MaintenanceRecord entity
+  - [x] 2.4 Implement MaintenanceRecord entity
+
+
+
+
+
     - Create MaintenanceRecord entity with all properties (Id, VehicleId, Date, Description, Cost)
     - Add navigation property to Vehicle
     - _Requirements: 3.3_
   
-  - [ ] 2.5 Implement Trip entity with business logic
+  - [x] 2.5 Implement Trip entity with business logic
+
+
+
+
+
     - Create Trip entity with all properties (Id, VehicleId, DriverId, Route, StartDate, EndDate, Distance)
     - Implement End method to finalize trip
     - Implement IsActive method to check if trip is ongoing
