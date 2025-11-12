@@ -1,0 +1,10 @@
+<div class="form-field" [class.form-field--error]="error">
+  <label [for]="id" class="form-field__label">
+    {{ label }}
+    <span *ngIf="required" class="form-field__required">*</span>
+  </label>
+  <div class="form-field__input">
+    <ng-content></ng-content>
+  </div>
+  <small *ngIf="error" class="form-field__error p-error">{{ error }}</small>
+</div>

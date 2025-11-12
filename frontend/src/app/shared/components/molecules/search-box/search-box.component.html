@@ -1,0 +1,10 @@
+<span class="p-input-icon-left search-box">
+  <i class="pi pi-search"></i>
+  <input 
+    pInputText 
+    type="text"
+    class="search-box__input"
+    [placeholder]="placeholder"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchChange($event)">
+</span>

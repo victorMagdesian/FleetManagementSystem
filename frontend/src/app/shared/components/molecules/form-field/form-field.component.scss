@@ -1,0 +1,60 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  &__label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-color);
+    display: block;
+  }
+
+  &__required {
+    color: var(--red-500);
+    margin-left: 0.25rem;
+  }
+
+  &__input {
+    width: 100%;
+
+    ::ng-deep {
+      input,
+      textarea,
+      .p-inputtext,
+      .p-dropdown,
+      .p-calendar,
+      .p-inputnumber {
+        width: 100%;
+      }
+    }
+  }
+
+  &__error {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  &--error {
+    .form-field__label {
+      color: var(--red-500);
+    }
+
+    ::ng-deep {
+      input,
+      textarea,
+      .p-inputtext,
+      .p-dropdown,
+      .p-calendar {
+        border-color: var(--red-500);
+
+        &:focus {
+          border-color: var(--red-500);
+          box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25);
+        }
+      }
+    }
+  }
+}

@@ -74,20 +74,34 @@
   - Adicionar suporte a tamanhos e cores
   - _Requirements: 12.2_
 
-- [ ] 4. Implementar componentes Atomic Design - Moléculas
-- [ ] 4.1 Criar componente FormField
+- [x] 4. Implementar componentes Atomic Design - Moléculas
+
+
+
+
+
+- [x] 4.1 Criar componente FormField
+
+
   - Implementar container com label, input slot e mensagem de erro
   - Adicionar indicador de campo obrigatório
   - Estilizar estados de validação
   - _Requirements: 7.4, 10.6, 12.3_
 
-- [ ] 4.2 Criar componente SearchBox
+
+
+- [x] 4.2 Criar componente SearchBox
+
   - Implementar input de busca com ícone
   - Adicionar debounce de 300ms
+
+
   - Emitir evento de busca
   - _Requirements: 2.6, 11.2, 12.3_
 
-- [ ] 4.3 Criar componente StatusBadge
+
+- [x] 4.3 Criar componente StatusBadge
+
   - Implementar lógica de mapeamento de status para labels pt-BR
   - Implementar lógica de mapeamento de status para cores
   - Usar componente Badge internamente
