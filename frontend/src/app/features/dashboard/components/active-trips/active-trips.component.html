@@ -1,0 +1,44 @@
+<p-card>
+  <div class="active-trips">
+    <div *ngIf="trips.length === 0 && !loading" class="empty-state">
+      <i class="pi pi-map"></i>
+      <p>Nenhuma viagem ativa no momento</p>
+    </div>
+
+    <p-table 
+      *ngIf="trips.length > 0 || loading"
+      [value]="tripsWithDetails" 
+      [loading]="loading || loadingDetails"
+      [paginator]="false"
+      styleClass="p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Veículo</th>
+          <th>Condutor</th>
+          <th>Rota</th>
+          <th>Início</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-trip>
+        <tr>
+          <td>
+            <div class="vehicle-info">
+              <span class="vehicle-plate">{{ trip.vehiclePlate }}</span>
+              <span class="vehicle-model">{{ trip.vehicleModel }}</span>
+            </div>
+          </td>
+          <td>{{ trip.driverName }}</td>
+          <td>
+            <span class="route">{{ trip.route }}</span>
+          </td>
+          <td>{{ trip.startDate | dateFormat:'dd/MM/yyyy HH:mm' }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4" class="text-center">Nenhuma viagem ativa</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>

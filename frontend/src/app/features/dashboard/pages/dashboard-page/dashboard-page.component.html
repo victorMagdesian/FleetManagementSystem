@@ -1,0 +1,29 @@
+<div class="dashboard">
+  <h1>Dashboard</h1>
+  
+  <app-fleet-summary
+    [availableVehicles]="availableVehicles"
+    [inUseVehicles]="inUseVehicles"
+    [inMaintenanceVehicles]="inMaintenanceVehicles"
+    [activeTrips]="activeTripsCount"
+    [loading]="loading">
+  </app-fleet-summary>
+  
+  <div class="dashboard__content">
+    <div class="dashboard__section">
+      <h2>Manutenções Próximas</h2>
+      <app-upcoming-maintenance 
+        [vehicles]="upcomingMaintenance"
+        [loading]="loading">
+      </app-upcoming-maintenance>
+    </div>
+    
+    <div class="dashboard__section">
+      <h2>Viagens Ativas</h2>
+      <app-active-trips 
+        [trips]="activeTrips"
+        [loading]="loading">
+      </app-active-trips>
+    </div>
+  </div>
+</div>

@@ -222,26 +222,39 @@
   - Configurar rota wildcard para 404
   - _Requirements: 6.2, 11.1, 11.3_
 
-- [ ] 9. Implementar módulo Dashboard
-- [ ] 9.1 Criar DashboardPage component
+- [x] 9. Implementar módulo Dashboard
+
+
+
+
+
+- [x] 9.1 Criar DashboardPage component
+
+
   - Implementar layout com grid de stats cards
   - Implementar seções para manutenções próximas e viagens ativas
   - Carregar dados usando forkJoin
   - Calcular estatísticas de veículos
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 11.1_
 
-- [ ] 9.2 Criar componente FleetSummary
+- [x] 9.2 Criar componente FleetSummary
+
+
   - Exibir 4 StatsCards com totais de veículos
   - Aplicar cores apropriadas para cada card
   - _Requirements: 1.1_
 
-- [ ] 9.3 Criar componente UpcomingMaintenance
+- [x] 9.3 Criar componente UpcomingMaintenance
+
+
   - Exibir lista de veículos com manutenção próxima
   - Usar DataTable ou lista customizada
   - Destacar com badges de alerta
   - _Requirements: 1.2, 5.6_
 
-- [ ] 9.4 Criar componente ActiveTrips
+- [x] 9.4 Criar componente ActiveTrips
+
+
   - Exibir lista de viagens ativas
   - Mostrar veículo, condutor e rota
   - _Requirements: 1.3_

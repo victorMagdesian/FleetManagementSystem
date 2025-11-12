@@ -1,0 +1,29 @@
+<div class="fleet-summary">
+  <app-stats-card
+    icon="pi-check-circle"
+    [value]="availableVehicles"
+    label="Veículos Disponíveis"
+    color="success">
+  </app-stats-card>
+  
+  <app-stats-card
+    icon="pi-car"
+    [value]="inUseVehicles"
+    label="Veículos em Uso"
+    color="info">
+  </app-stats-card>
+  
+  <app-stats-card
+    icon="pi-wrench"
+    [value]="inMaintenanceVehicles"
+    label="Em Manutenção"
+    color="warning">
+  </app-stats-card>
+  
+  <app-stats-card
+    icon="pi-map"
+    [value]="activeTrips"
+    label="Viagens Ativas"
+    color="primary">
+  </app-stats-card>
+</div>

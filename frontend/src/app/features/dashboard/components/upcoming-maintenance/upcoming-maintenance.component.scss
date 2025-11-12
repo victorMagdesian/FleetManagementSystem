@@ -1,0 +1,53 @@
+.upcoming-maintenance {
+  min-height: 200px;
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+
+    i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #10b981;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+
+  .maintenance-date {
+    font-weight: 500;
+    color: #f59e0b;
+  }
+
+  .text-center {
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+  }
+}
+
+::ng-deep {
+  .upcoming-maintenance {
+    .p-datatable {
+      .p-datatable-thead > tr > th {
+        background-color: #f9fafb;
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: #374151;
+        padding: 0.75rem;
+      }
+
+      .p-datatable-tbody > tr > td {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
