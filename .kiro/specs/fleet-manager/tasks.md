@@ -360,7 +360,13 @@
   - Configure log levels in appsettings.json
   - _Requirements: 5.5_
 
-- [ ] 14. Create Docker configuration
+- [x] 14. Create Docker configuration
+
+
+
+
+
+
   - Create Dockerfile for FleetManager.Api project
   - Create docker-compose.yml with services: api, sqlserver, redis, seq
   - Configure environment variables for connection strings
