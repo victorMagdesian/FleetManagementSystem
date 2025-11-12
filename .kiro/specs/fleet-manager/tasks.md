@@ -118,20 +118,32 @@
     - Verify migration creates all tables, indexes, and foreign keys correctly
     - _Requirements: 1.5, 2.5, 3.5_
 
-- [ ] 5. Implement repository pattern in infrastructure layer
-  - [ ] 5.1 Implement VehicleRepository
+- [x] 5. Implement repository pattern in infrastructure layer
+
+
+
+
+  - [x] 5.1 Implement VehicleRepository
+
+
     - Implement all IVehicleRepository methods using EF Core
     - Implement GetVehiclesWithUpcomingMaintenanceAsync with date filtering logic
     - Include proper error handling and null checks
     - _Requirements: 1.1, 1.4, 4.4, 7.1, 7.3_
   
+
+
   - [ ] 5.2 Implement DriverRepository
     - Implement all IDriverRepository methods using EF Core
     - Implement GetAvailableAsync filtering by Active status
     - Include proper error handling and null checks
+
+
     - _Requirements: 2.1, 2.4, 7.2_
   
-  - [ ] 5.3 Implement MaintenanceRecordRepository
+  - [x] 5.3 Implement MaintenanceRecordRepository
+
+
     - Implement all IMaintenanceRecordRepository methods using EF Core
     - Include proper error handling and null checks
     - _Requirements: 3.1, 3.5_
