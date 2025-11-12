@@ -85,7 +85,7 @@
   - Create ITripRepository interface with methods: GetByIdAsync, GetAllAsync, GetActiveTripsAsync, GetByVehicleIdAsync, GetByDriverIdAsync, AddAsync, UpdateAsync
   - _Requirements: 9.2_
 
-- [ ] 4. Implement infrastructure layer - database setup
+- [x] 4. Implement infrastructure layer - database setup
   - [x] 4.1 Create FleetManagerDbContext
 
 
@@ -108,7 +108,12 @@
     - Implement TripConfiguration with relationships
     - _Requirements: 1.5, 2.5, 3.5_
   
-  - [ ] 4.3 Create initial database migration
+  - [x] 4.3 Create initial database migration
+
+
+
+
+
     - Generate EF Core migration for initial schema
     - Verify migration creates all tables, indexes, and foreign keys correctly
     - _Requirements: 1.5, 2.5, 3.5_
