@@ -207,8 +207,14 @@
   - Tornar responsivo com menu hambúrguer em mobile
   - _Requirements: 6.1, 6.2, 6.4, 6.5, 9.1, 9.3, 12.5_
 
-- [ ] 8. Configurar sistema de rotas
-- [ ] 8.1 Criar arquivo de rotas principal
+- [x] 8. Configurar sistema de rotas
+
+
+
+
+- [x] 8.1 Criar arquivo de rotas principal
+
+
   - Configurar rota raiz com MainLayout
   - Configurar rotas filhas para cada módulo
   - Implementar lazy loading para todos os módulos
